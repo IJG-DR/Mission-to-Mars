@@ -1,4 +1,3 @@
-####
 
 #################################################################
 # MODULE 10.5.1 - Use Flask to Create a Web App
@@ -6,9 +5,9 @@
 
 # Use Flask to render a template, redirect to another url, 
 # and create a URL.
-from fask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for
 # Use PyMongo to interact with our Mongo database.
-from flask_pymongo import flask_pymongo
+from flask_pymongo import PyMongo
 # Use the scraping code, we will convert from Jupyter notebook 
 # to Python.
 import scraping
