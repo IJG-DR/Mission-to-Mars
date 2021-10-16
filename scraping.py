@@ -24,6 +24,8 @@ def scrape_all():
     browser = Browser('chrome', **executable_path, headless=True)
     # Call the function that gets the title and teaser body
     news_title, news_paragraph = mars_news(browser)
+    # Call the function that gets the urls and titles for the hemispheres
+    hemispheres = mars_hemispheres(browser)
     # Run all scraping functions and store results in dictionary.
     # Include a timestamp to know when the data was obtained.
     # We will also call on the two other functions to get the
@@ -33,6 +35,7 @@ def scrape_all():
       "news_paragraph": news_paragraph,
       "featured_image": featured_image(browser),
       "facts": mars_facts(),
+      "hemispheres": hemispheres,
       "last_modified": dt.datetime.now()
     }
     
@@ -164,6 +167,72 @@ def mars_facts():
 
     # Convert dataframe into HTML format, add bootstrap
     return df.to_html()
+
+
+
+#####################################################################
+# SCRAPE FOR THE HEMISPHERES
+#####################################################################
+
+def mars_hemispheres(browser):
+
+     #1. Use browser to visit the URL 
+    url = 'https://marshemispheres.com/'
+    browser.visit(url)
+
+    # 2. Create a list to hold the images and titles.
+    hemisphere_image_urls = []
+
+    # 3. Write code to retrieve the image urls and titles for each hemisphere.
+    html = browser.html
+    img_soup = soup(html, 'html.parser')
+    img_soup
+
+    # Find the relevant content section in the html block
+    relevant_section = img_soup.find('div', class_='collapsible results')
+
+    # Use a for loop to: 
+    # CHANGE CODE TO CLICK LINKS !!!!!
+    # a) click on each hemisphere link, 
+    # b) navigate to the full-resolution image page, 
+    # c) retrieve the full-resolution image URL string and title for the hemisphere image,
+    # d) use browser.back() to navigate back to the beginning to get the next hemisphere image.
+
+    for titles in relevant_section:
+    
+        try:
+            # Get the hemisphere image titles
+            image_title = titles.find('h3').text
+            print(image_title)
+            
+            # Get the thumbnail url
+            thumbnail_url = titles.find('img', class_='thumb').get('src')
+            print(thumbnail_url)
+            
+            img_link = titles.a['href']
+            print(img_link)
+            
+            #complete the url address
+            img_link_url = url + img_link
+            print(img_link_url)
+            
+            #visit the image url
+            browser.visit(img_link_url)
+            html_2 = browser.html
+            img_soup_2 = soup(html_2, 'html.parser')
+            
+            # exctarct the jpg image url
+            image_url= url + img_soup_2.find('img', class_='wide-image').get('src')
+            print(image_url)
+            
+            #Add image title and url to the list
+            hemisphere_image_urls.append({'img_url':image_url,'title':image_title})
+            
+        except AttributeError:
+            None
+
+    # 4. Print the list that holds the dictionary of each image url and title.
+    return hemisphere_image_urls
 
 
 #####################################################################
