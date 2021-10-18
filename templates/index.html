@@ -1,5 +1,6 @@
 <!-- ######################################################## -->
 <!-- # MODULE 10.6.1 - Customize the Appearance               -->
+<!-- # MODULE CHALLENGE DELIVERABLES 1, 2 and 3               -->
 <!-- ######################################################## -->
 
 
@@ -18,22 +19,39 @@
 
         <!-- Add a link to access Bootstrap's components and use a stylesheet -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        
 
+        <!-- WAS TRYING TO CHANGE HEADING 1 FONT IN JUMBOTRON TO GOOGLE FONTS "ORBITRON" -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+        <!---->
+        
     </head>
 
-    <!-- Mars News -->
+    <!-- Mars News . For Deliverable 3, added a grey background -->
 
     <body>
-
+        <style type="text/css">
+            body { background: rgba(0,0,0,0.7) !important; } /* Adding !important forces the browser to overwrite the default style applied by Bootstrap */
+         </style>
         <!-- Add our first container for the body -->
         <div class="container">
-
+            
             <!-- Add the heading using Jumbotron, one of Bootstrap's style 
-                components -->
-            <div class="jumbotron text-center">
-        
+                components. For Deliverable 3, added a background image too. -->
+            <div 
+                class="jumbotron text-center"
+                style="background-image: url('https://www.esa.int/var/esa/storage/images/esa_multimedia/images/2020/04/mars_landscape/21916769-2-eng-GB/Mars_landscape_pillars.jpg'); background-size: cover;" 
+                >
+                
+                <h1 class="mb-3 h1">Mission to Mars</h1>
+                <!--class="jumbotron text-center">
+                -->
+
+
                 <!-- Add the main text of the container -->
-                <h1>Mission to Mars</h1>
+                <!--<h1>Mission to Mars</h1> -->
 
                 <!-- Add a button using Bootstrap's primary button component 
                     and set the text of the button -->
@@ -57,16 +75,20 @@
                         for these classes). -->
                     <div class="media">
                         <div class="media-body">
-                            <!-- Aadd a second level header -->
-                            <h2>Latest Mars News</h2>
+                            <!-- Aadd a second level header. 
+                                For Deliverable 3, changed text color to white-->
+                            <h2 style="color: white">Latest Mars News</h2>
                             <!-- Add the article we scraped where mars 
                                 refers to the MongoDB database and news_title to the 
                                 scraped variable that was stored. We use Bootstrap's
-                                class "media-heading" to format this heading. -->
-                            <h4 class="media-heading">{{ mars.news_title }}</h4>
+                                class "media-heading" to format this heading.
+                                For Deliverable 3, changed text color to white-->
+                            <h4 class="media-heading"
+                            style="color: white">{{ mars.news_title }}</h4>
                             <!-- Add the article summary that was scraped using 
-                                a default text style -->
-                            <p>{{ mars.news_paragraph }}</p>
+                                a default text style. 
+                                For Deliverable 3, changed text color to white-->
+                            <p style="color: white">{{ mars.news_paragraph }}</p>
                         </div>
                     </div>
                 </div>
@@ -75,9 +97,10 @@
             <!-- Section for Featured Image and Facts table -->
             <div class="row" id="mars-featured-image">
                 
-                <!-- Use the first 8 columnnes to show the image -->
+                <!-- Use the first 8 columnnes to show the image.
+                    For Deliverable 3, changed text color to white -->
                 <div class="col-md-8">
-                    <h2>Featured Mars Image</h2>
+                    <h2 style="color: white">Featured Mars Image</h2>
                     <!-- Insert image using Bootstrap's responsive
                     component so that it resizes automatically 
                     based on the browser window size, and a text
@@ -93,19 +116,21 @@
                 <!-- Use the remaining 4 columns (out of the 12 total 
                     in a Bootstrap gird) to show the mars facts -->
                 <div class="col-md-4">
-                    <!-- Mars Facts -->
-                    <div class="row" id="mars-facts">
-                        <h4>Mars Facts</h4>
+                    <!-- Mars Facts 
+                        For Deliverable 3, changed text color to white-->
+                    <div class="row" id="mars-facts" style="color: white">
+                        <h4 style="color: white">Mars Facts</h4>
                         <!-- Add code to reference the facts table in 
                          the mars document and tell the web browser that
                          this code doesn't contain anything maliciuous -->
-                        {{ mars.facts | safe }}
+                         {{ mars.facts | safe }}
                     </div>
                 </div>
             </div>
-            <!-- Add the hemisphere images -->
+            <!-- Add the hemisphere images 
+                For Deliverable 3, changed text color to white-->
             <div class="row" id="mars-hemispheres">
-                <h2>
+                <h2 style="color: white">
                     <center>Mars Hemispheres</center>
                 </h2>
                 {% for hemisphere in mars.hemispheres %}
@@ -115,7 +140,8 @@
                             class="img-responsive"
                             alt="Responsive image"
                         />
-                        <h5 class="image_title">{{ hemisphere.title }}</h5> 
+                        <h5 class="image_title"
+                        style="color: white">{{ hemisphere.title }}</h5> 
                     </div>
                 {% endfor %}
             </div>
