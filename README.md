@@ -1,3 +1,3 @@
 # Mission to Mars
 
-[!Screenshot](Screen_shot.png)
+![Screenshot](Screen_shot.png)
